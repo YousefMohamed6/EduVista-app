@@ -1,6 +1,9 @@
 # Edu Vista
 Edu Vista is a comprehensive educational app designed for Android, built using Flutter. It offers a range of features to enhance the learning experience. The app leverages BLoC for efficient state management and Firebase for backend services, ensuring a robust and scalable platform.
-
+<div>
+<img src="https://github.com/e-khalifa/EduVista-app/blob/main/assets/screenshots/Blue%20Modern%20Mobile%20Application%20Presentation%20(1).jpg">
+<div>
+  
 ## Table of Contents
 1. [✨ Key Features](#-key-features)
 2. [📸 Demo](#-demo)
@@ -127,3 +130,4 @@ Edu Vista is a comprehensive educational app designed for Android, built using F
 | [youtube_player_flutter](https://pub.dev/packages/youtube_player_flutter)                                             | 8.1.2      |  It Provides a youtube IFrame Within your app.                                        |
 | [cached_network_image](https://pub.dev/packages/cached_network_image)                                           | 3.4.0         | It stores loaded images from the web in its cache directory, reducing the need for frequent network requests. This improves performance and ensures images are available even when the device is offline.                                                                                                                           | | [paymob_payment](https://pub.dev/packages/paymob_payment)                                           | 0.0.1+1        | Integrates Paymob’s payment gateway to handle transactions securely and efficiently.                                                                                                                           |
 | [animated_rating_stars](https://pub.dev/packages/animated_rating_stars)                                           | 1.0.1       | Offers animated star rating widgets for engaging course ratings.                                                                                                                           |
+

@@ -17,4 +17,12 @@ abstract class PreferencesService {
 
   static set isOnBoardingSeen(bool value) =>
       prefs!.setBool('isOnBoardingSeen', value);
+
+  static String get locale => prefs!.getString('locale') ?? 'en';
+
+  static set locale(String value) => prefs!.setString('locale', value);
+
+  static String get themeMode => prefs!.getString('themeMode') ?? 'light';
+
+  static set themeMode(String value) => prefs!.setString('themeMode', value);
 }

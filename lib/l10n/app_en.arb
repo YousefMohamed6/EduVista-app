@@ -119,5 +119,15 @@
     }
   },
   "lectureVideo": "Lecture Video",
-  "invalidUrl": "Invalid Url"
+  "invalidUrl": "Invalid Url",
+  "theme": "Theme",
+  "language": "Language",
+  "lightMode": "Light Mode",
+  "darkMode": "Dark Mode",
+  "english": "English",
+  "arabic": "Arabic",
+  "appearance": "Appearance",
+  "deleteAccountTitle": "Are you sure you want to delete your account?",
+  "deleteAccountWarning": "Deleting your account will permanently remove all your data, including your progress, courses, and personal information. This action cannot be undone.",
+  "confirmAction": "If you're sure, please confirm below"
 }

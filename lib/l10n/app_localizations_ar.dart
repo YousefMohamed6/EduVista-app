@@ -327,4 +327,35 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get invalidUrl => 'رابط غير صالح';
+
+  @override
+  String get theme => 'المظهر';
+
+  @override
+  String get language => 'اللغة';
+
+  @override
+  String get lightMode => 'الوضع الفاتح';
+
+  @override
+  String get darkMode => 'الوضع الداكن';
+
+  @override
+  String get english => 'الإنجليزية';
+
+  @override
+  String get arabic => 'العربية';
+
+  @override
+  String get appearance => 'المظهر العام';
+
+  @override
+  String get deleteAccountTitle => 'هل أنت متأكد أنك تريد حذف حسابك؟';
+
+  @override
+  String get deleteAccountWarning =>
+      'سيؤدي حذف حسابك إلى إزالة جميع بياناتك نهائيًا، بما في ذلك تقدمك ودوراتك ومعلوماتك الشخصية. لا يمكن التراجع عن هذا الإجراء.';
+
+  @override
+  String get confirmAction => 'إذا كنت متأكدًا، يرجى التأكيد أدناه';
 }

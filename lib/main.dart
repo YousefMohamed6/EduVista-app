@@ -16,6 +16,7 @@ import 'src/app.dart';
 import 'src/features/auth/logic/auth_cubit/auth_cubit.dart';
 import 'src/features/lecture/logic/lecture_bloc/lecture_bloc.dart';
 import 'src/features/profile/logic/user_cubit/user_cubit.dart';
+import 'src/features/settings/presentation/manager/settings_cubit.dart';
 import 'firebase_options.dart';
 import 'src/shared/services/pref_service.dart';
 
@@ -57,6 +58,7 @@ void main() async {
                   ..add(GetCategoriesEvent())),
             BlocProvider(create: (ctx) => CourseBloc(courseRepository)),
             BlocProvider(create: (ctx) => LectureBloc()),
+            BlocProvider(create: (ctx) => SettingsCubit()),
           ],
           child: const MyApp(),
         ),

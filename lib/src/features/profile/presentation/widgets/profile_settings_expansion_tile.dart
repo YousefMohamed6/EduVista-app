@@ -1,5 +1,7 @@
+import 'package:edu_vista/l10n/app_localizations.dart';
 import 'package:edu_vista/src/features/auth/presentation/pages/login_page.dart';
 import 'package:edu_vista/src/features/profile/logic/user_cubit/user_cubit.dart';
+import 'package:edu_vista/src/features/settings/presentation/Screens/settings_screen.dart';
 import 'package:edu_vista/src/shared/widgets/my_dialog.dart';
 import 'package:edu_vista/src/shared/utils/color_utility.dart';
 import 'package:edu_vista/src/shared/utils/text_utility.dart';
@@ -23,14 +25,16 @@ class _ProfileSettingsExpansionTileState
   @override
   Widget build(BuildContext context) {
     return Column(children: [
-      _buildAbout(),
-      _buildDeleteAccount(),
+      _buildAbout(context),
+      _buildAppSettings(context),
+      _buildDeleteAccount(context),
     ]);
   }
 
-  Widget _buildAbout() {
+  Widget _buildAbout(BuildContext context) {
     return ListTile(
-      title: Text('About', style: TextUtility.body2Text()),
+      title: Text(AppLocalizations.of(context)!.aboutUs,
+          style: TextUtility.body2Text()),
       trailing: const Icon(
         Icons.arrow_right_outlined,
         color: ColorUtility.grey,
@@ -42,25 +46,41 @@ class _ProfileSettingsExpansionTileState
     );
   }
 
-  Widget _buildDeleteAccount() {
+  Widget _buildAppSettings(BuildContext context) {
+    return ListTile(
+      title: Text(AppLocalizations.of(context)!.appearance,
+          style: TextUtility.body2Text()),
+      trailing: const Icon(
+        Icons.arrow_right_outlined,
+        color: ColorUtility.grey,
+      ),
+      onTap: () {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const SettingsScreen()));
+      },
+    );
+  }
+
+  Widget _buildDeleteAccount(BuildContext context) {
+    final localization = AppLocalizations.of(context)!;
     return Padding(
       padding: EdgeInsets.only(left: 3.w),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           MyTextButton(
-              text: 'Delete Account',
+              text: localization.delete,
               textStyle: TextUtility.hintText(),
               onPressed: () {
                 showDialog(
                     context: context,
                     builder: (context) {
                       return MyDialog(
-                        title: 'Are you sure you want to delete your account?',
+                        title: localization.deleteAccountTitle,
                         child: Column(
                           children: [
                             Text(
-                              'Deleting your account will permanently remove all your data, including your progress, courses, and personal information. This action cannot be undone.',
+                              localization.deleteAccountWarning,
                               style: TextUtility.hintText(),
                             ),
                             SizedBox(height: 15.h),
@@ -69,7 +89,7 @@ class _ProfileSettingsExpansionTileState
                             ),
                             SizedBox(height: 5.h),
                             Text(
-                              "If you're sure, please confirm below",
+                              localization.confirmAction,
                               style: TextUtility.body2Text(
                                   fontWeight: FontWeight.w800),
                             ),

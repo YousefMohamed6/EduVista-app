@@ -1,3 +1,4 @@
+import 'package:edu_vista/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -106,7 +107,7 @@ class _SearchPageState extends State<SearchPage> {
 
   Widget _buildCategorySearch() {
     return MyExpansionTile(
-      title: 'Courses',
+      title: AppLocalizations.of(context)!.courses,
       expanded: true,
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 10.w),
@@ -147,7 +148,7 @@ class _SearchPageState extends State<SearchPage> {
 
   Widget _buildInstructorsSearch() {
     return MyExpansionTile(
-      title: 'Instructors',
+      title: AppLocalizations.of(context)!.instructors,
       expanded: true,
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 10.w),

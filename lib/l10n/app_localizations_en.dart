@@ -332,4 +332,36 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get invalidUrl => 'Invalid Url';
+
+  @override
+  String get theme => 'Theme';
+
+  @override
+  String get language => 'Language';
+
+  @override
+  String get lightMode => 'Light Mode';
+
+  @override
+  String get darkMode => 'Dark Mode';
+
+  @override
+  String get english => 'English';
+
+  @override
+  String get arabic => 'Arabic';
+
+  @override
+  String get appearance => 'Appearance';
+
+  @override
+  String get deleteAccountTitle =>
+      'Are you sure you want to delete your account?';
+
+  @override
+  String get deleteAccountWarning =>
+      'Deleting your account will permanently remove all your data, including your progress, courses, and personal information. This action cannot be undone.';
+
+  @override
+  String get confirmAction => 'If you\'re sure, please confirm below';
 }

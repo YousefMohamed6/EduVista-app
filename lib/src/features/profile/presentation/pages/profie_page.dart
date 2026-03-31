@@ -14,6 +14,8 @@ import '../../logic/user_cubit/user_state.dart';
 import '../../../../shared/utils/text_utility.dart';
 import '../../../../shared/widgets/tiles/my_expansion_tile.dart';
 
+import 'package:edu_vista/l10n/app_localizations.dart';
+
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
 
@@ -22,17 +24,18 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  final List<String> profileOptions = [
-    "Edit",
-    "Settings",
-  ];
-
   @override
   Widget build(BuildContext context) {
+    final localization = AppLocalizations.of(context)!;
+    final List<String> profileOptions = [
+      localization.edit,
+      localization.settings,
+    ];
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Profile',
+          localization.profile,
           style: TextUtility.titleText(),
         ),
         centerTitle: true,
@@ -90,7 +93,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                       ),
                       MyTextButton(
-                          text: 'Logout',
+                          text: localization.logout,
                           textStyle: TextUtility.headerText(
                               color: Colors.red, fontWeight: FontWeight.w700),
                           onPressed: () {

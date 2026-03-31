@@ -1,3 +1,4 @@
+import 'package:edu_vista/l10n/app_localizations.dart';
 import 'package:edu_vista/src/shared/utils/text_utility.dart';
 import 'package:edu_vista/src/shared/widgets/buttons/my_elevated_button.dart';
 import 'package:edu_vista/src/features/onboarding/onboarding_item.dart';
@@ -88,7 +89,9 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
         right: 10.w,
         child: MyTextButton(
             onPressed: currentPage == 3 ? goToPreviousPage : skipToEnd,
-            text: currentPage == 3 ? 'Back' : 'Skip',
+            text: currentPage == 3
+                ? AppLocalizations.of(context)!.back
+                : AppLocalizations.of(context)!.skip,
             textStyle: TextUtility.bodyText(
               color: ColorUtility.mediumBlack,
             )));
@@ -103,25 +106,25 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
         children: [
           OnBoardingItem(
             imagePath: ImageUtility.certifications,
-            title: 'Certification and Badges',
-            description: 'Earn a certificate after completion of every course',
+            title: AppLocalizations.of(context)!.certificationAndBadges,
+            description: AppLocalizations.of(context)!.certificationDesc,
             sizedBoxHeight: 224.h,
             imageHeight: 290.h,
           ),
-          const OnBoardingItem(
+          OnBoardingItem(
             imagePath: ImageUtility.progressTracking,
-            title: 'Progress Tracking',
-            description: 'Check your Progress of every course',
+            title: AppLocalizations.of(context)!.progressTracking,
+            description: AppLocalizations.of(context)!.progressDesc,
           ),
-          const OnBoardingItem(
+          OnBoardingItem(
             imagePath: ImageUtility.offlineAccess,
-            title: 'Offline Access',
-            description: 'Make your course available offline',
+            title: AppLocalizations.of(context)!.offlineAccess,
+            description: AppLocalizations.of(context)!.offlineDesc,
           ),
-          const OnBoardingItem(
+          OnBoardingItem(
             imagePath: ImageUtility.courseCatalog,
-            title: 'Course Catalog',
-            description: 'View in which courses you are enrolled',
+            title: AppLocalizations.of(context)!.courseCatalog,
+            description: AppLocalizations.of(context)!.courseCatalogDesc,
           ),
         ],
       ),
@@ -181,7 +184,8 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                     padding: EdgeInsets.only(
                         bottom: 73.h, top: 76.h, right: 30.w, left: 30.w),
                     child: MyElevatedButton(
-                        child: const Text('Let\'s Start Learning!'),
+                        child: Text(
+                            AppLocalizations.of(context)!.letsStartLearning),
                         onPressed: () => onStarting()))
                 : Padding(
                     padding: EdgeInsets.only(

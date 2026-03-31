@@ -45,5 +45,9 @@ app.*.map.json
 # dot env
 .env
 
-#firebase
+# firebase
 lib/firebase_options.dart
+android/app/google-services.json
+ios/Runner/GoogleService-Info.plist
+firebase.json
+.firebaserc

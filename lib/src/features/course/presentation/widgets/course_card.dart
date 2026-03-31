@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../data/course_model.dart';
-import '../pages/course_page.dart';
+import '../../domain/entities/course.dart';
+import '../Screens/course_screen.dart';
 import '../../../../shared/utils/color_utility.dart';
 
 class CourseCard extends StatelessWidget {
@@ -22,7 +22,7 @@ class CourseCard extends StatelessWidget {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => CoursePage(course: course)));
+                builder: (context) => CourseScreen(course: course)));
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -41,7 +41,7 @@ class CourseCard extends StatelessWidget {
                 image: DecorationImage(
                   image: NetworkImage(course.image == ''
                       ? ImageUtility.courseImagePlaceholder
-                      : course.image!),
+                      : course.image),
                   fit: BoxFit.fill,
                 ),
               ),
@@ -58,7 +58,7 @@ class CourseCard extends StatelessWidget {
             ],
           ),
           SizedBox(height: 5.h),
-          Text(course.title ?? '',
+          Text(course.title,
               style: TextUtility.headerText(fontWeight: FontWeight.w600)),
           const Spacer(),
           Row(

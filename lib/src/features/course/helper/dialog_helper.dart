@@ -1,8 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:edu_vista/src/features/course/domain/entities/course.dart';
 import 'package:edu_vista/src/features/course/presentation/pages/views/certificate_view.dart';
-
-import '../data/course_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 
 class CertificateDialog {
   static void show(BuildContext context, Course course) {

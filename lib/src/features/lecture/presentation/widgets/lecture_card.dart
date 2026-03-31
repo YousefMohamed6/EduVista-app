@@ -1,3 +1,4 @@
+import 'package:edu_vista/l10n/app_localizations.dart';
 import 'package:edu_vista/src/shared/utils/text_utility.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -41,7 +42,7 @@ class LectureCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Lecture ${lecture!.sort}',
+                Text(AppLocalizations.of(context)!.lectureCount(lecture!.sort!),
                     style: TextUtility.bodyText(
                       fontWeight: FontWeight.w700,
                       color: textcolor,
@@ -61,7 +62,9 @@ class LectureCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Duration: ${lecture!.duration} min',
+                Text(
+                    AppLocalizations.of(context)!
+                        .durationMin(lecture!.duration!),
                     style: TextStyle(
                         fontSize: 10.sp,
                         fontWeight: textFontWeight,

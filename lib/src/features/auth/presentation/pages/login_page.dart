@@ -1,3 +1,4 @@
+import 'package:edu_vista/l10n/app_localizations.dart';
 import 'package:edu_vista/src/shared/utils/text_utility.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -39,10 +40,11 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final localization = AppLocalizations.of(context)!;
     return BlocListener<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is LoginFailed) {
-          String message = _getErrorMessage(state.error);
+          String message = _getErrorMessage(state.error, localization);
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(message)),
           );
@@ -63,14 +65,14 @@ class _LoginPageState extends State<LoginPage> {
             MyTextField(
               controller: emailController,
               hint: 'Ahmedramy52@gmail.com',
-              label: 'Email',
+              label: localization.email,
               keyboardType: TextInputType.emailAddress,
             ),
             SizedBox(height: 20.h),
             MyTextField(
               controller: passwordController,
               hint: '***********',
-              label: 'Password',
+              label: localization.password,
               obscureText: true,
               keyboardType: TextInputType.visiblePassword,
             ),
@@ -78,7 +80,7 @@ class _LoginPageState extends State<LoginPage> {
             Align(
               alignment: Alignment.centerRight,
               child: MyTextButton(
-                text: 'Forgot Your Password?',
+                text: localization.forgotPassword,
                 textStyle:
                     TextUtility.fringeText(color: ColorUtility.secondary),
                 onPressed: () {
@@ -95,14 +97,14 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  String _getErrorMessage(String error) {
+  String _getErrorMessage(String error, AppLocalizations localization) {
     switch (error) {
       case 'user-not-found':
-        return 'User not found.';
+        return localization.userNotFound;
       case 'wrong-password':
-        return 'Incorrect password.';
+        return localization.incorrectPassword;
       default:
-        return 'Login failed. Please try again.';
+        return localization.loginFailed;
     }
   }
 }

@@ -1,12 +1,14 @@
+import 'package:edu_vista/l10n/app_localizations.dart';
+import 'package:edu_vista/src/features/course/domain/entities/course.dart';
 import 'package:edu_vista/src/shared/utils/image_utility.dart';
 import 'package:edu_vista/src/shared/widgets/my_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../../shared/utils/color_utility.dart';
 import '../../../../shared/utils/text_utility.dart';
 import '../../../../shared/widgets/buttons/my_elevated_button.dart';
-import '../../../course/data/course_model.dart';
 import '../../../course/presentation/widgets/course_tile.dart';
 import '../../logic/cart_cubit/cart_cubit.dart';
 
@@ -23,7 +25,7 @@ class _CartPageState extends State<CartPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Cart',
+          AppLocalizations.of(context)!.cart,
           style: TextUtility.titleText(),
         ),
         centerTitle: true,
@@ -44,10 +46,10 @@ class _CartPageState extends State<CartPage> {
         listener: (context, state) {
           if (state is CartPurchaseSuccess) {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Purchase successful!'),
+              SnackBar(
+                content: Text(AppLocalizations.of(context)!.purchaseSuccessful),
                 backgroundColor: Colors.green,
-                duration: Duration(seconds: 3),
+                duration: const Duration(seconds: 3),
               ),
             );
           }
@@ -60,7 +62,7 @@ class _CartPageState extends State<CartPage> {
           if (state is CartLoaded) {
             if (state.cartItems.isEmpty) {
               return Center(
-                  child: Text('Your cart is empty',
+                  child: Text(AppLocalizations.of(context)!.cartEmpty,
                       style: TextUtility.fringeText(color: ColorUtility.grey)));
             }
             double totalPrice = context.read<CartCubit>().totalPriceInEGP();
@@ -75,7 +77,9 @@ class _CartPageState extends State<CartPage> {
                       context.read<CartCubit>().buyCourses(context);
                     },
                     color: ColorUtility.main,
-                    child: Text('Start Your Courses Now:  $totalPrice EGP'),
+                    child: Text(AppLocalizations.of(context)!.startCoursesNow(
+                        totalPrice.toString(),
+                        AppLocalizations.of(context)!.egp)),
                   ),
                 ],
               ),
@@ -98,7 +102,7 @@ class _CartPageState extends State<CartPage> {
             course,
             CourseTile(
               title: course.title,
-              image: course.image!,
+              image: course.image,
               imagePlaceHolder: ImageUtility.courseImagePlaceholder,
               width: 157,
               height: 105,
@@ -129,7 +133,7 @@ class _CartPageState extends State<CartPage> {
 
   Widget _deleteCourse(Course course, Widget child) {
     return Dismissible(
-      key: Key(course.id ?? ''),
+      key: Key(course.id),
       direction: DismissDirection.endToStart,
       background: Container(
         decoration: BoxDecoration(
@@ -143,9 +147,9 @@ class _CartPageState extends State<CartPage> {
             children: [
               const Icon(Icons.delete, color: Colors.white),
               SizedBox(width: 10.w),
-              const Text(
-                'Delete',
-                style: TextStyle(color: Colors.white),
+              Text(
+                AppLocalizations.of(context)!.delete,
+                style: const TextStyle(color: Colors.white),
               ),
             ],
           ),
@@ -156,8 +160,7 @@ class _CartPageState extends State<CartPage> {
             context: context,
             builder: (context) {
               return MyDialog(
-                  title:
-                      'Are You Sure You Wanna Delet This Course From Your Cart?',
+                  title: AppLocalizations.of(context)!.deleteConfirmation,
                   child: const SizedBox(),
                   onConfirm: () {
                     context.read<CartCubit>().removeCourseFromCart(course);
@@ -174,7 +177,7 @@ class _CartPageState extends State<CartPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image.asset(ImageUtility.notFound),
-          Text("Can't load Cart now, Try again later!",
+          Text(AppLocalizations.of(context)!.cartLoadError,
               style: TextUtility.fringeText(color: ColorUtility.grey))
         ],
       ),

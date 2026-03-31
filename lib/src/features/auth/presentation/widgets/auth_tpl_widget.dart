@@ -1,3 +1,4 @@
+import 'package:edu_vista/l10n/app_localizations.dart';
 import 'package:edu_vista/src/shared/utils/text_utility.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -23,11 +24,14 @@ class AuthTplWidget extends StatefulWidget {
 
 class _AuthTplWidgetState extends State<AuthTplWidget> {
   bool get isLogin => widget.onLogin != null;
-  String get title => isLogin ? "Login" : "Sign Up";
+  String getTitle(AppLocalizations localization) =>
+      isLogin ? localization.login : localization.signUp;
   bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
+    final localization = AppLocalizations.of(context)!;
+    final title = getTitle(localization);
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -85,12 +89,12 @@ class _AuthTplWidgetState extends State<AuthTplWidget> {
               children: [
                 Text(
                   isLogin
-                      ? 'Don\'t have an account?'
-                      : 'Already have an account?',
+                      ? localization.dontHaveAccount
+                      : localization.alreadyHaveAccount,
                   style: TextUtility.body2Text(),
                 ),
                 MyTextButton(
-                  text: isLogin ? 'Sign Up Here' : 'Login Here',
+                  text: isLogin ? localization.signUpHere : localization.loginHere,
                   textStyle:
                       TextUtility.body2Text(color: ColorUtility.secondary),
                   textButtonStyle:

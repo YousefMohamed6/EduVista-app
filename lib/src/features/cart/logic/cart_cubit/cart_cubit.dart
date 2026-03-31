@@ -1,12 +1,13 @@
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:edu_vista/src/features/course/presentation/pages/my_courses.dart';
+import 'package:edu_vista/src/features/course/domain/entities/course.dart';
+import 'package:edu_vista/src/features/course/presentation/Screens/my_courses_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:paymob_payment/paymob_payment.dart';
 
-import '../../../course/data/course_model.dart';
+import '../../../course/data/models/course_model.dart';
 
 part 'cart_state.dart';
 
@@ -33,7 +34,7 @@ class CartCubit extends Cubit<CartState> {
           .get();
 
       _cartCourses = cartSnapshot.docs
-          .map((doc) => Course.fromJson({
+          .map((doc) => CourseModel.fromJson({
                 'id': doc.id,
                 ...doc.data(),
               }))
@@ -45,7 +46,6 @@ class CartCubit extends Cubit<CartState> {
     }
   }
 
-  // tested
   Future<void> addCourseToCart(Course course) async {
     emit(CartLoading());
     try {
@@ -58,15 +58,11 @@ class CartCubit extends Cubit<CartState> {
       await _updateFirestoreCart();
       emit(CartUpdated(_cartCourses));
       await fetchCart();
-      for (var course in _cartCourses) {
-        print(course.title);
-      }
     } catch (e) {
       emit(CartError('Failed to add course to cart: $e'));
     }
   }
 
-  // tested
   Future<void> removeCourseFromCart(Course course) async {
     emit(CartLoading());
     try {
@@ -80,7 +76,6 @@ class CartCubit extends Cubit<CartState> {
     }
   }
 
-  // Clear the entire cart and update Firestore
   Future<void> clearCart() async {
     emit(CartLoading());
     try {
@@ -109,13 +104,12 @@ class CartCubit extends Cubit<CartState> {
     }
     emit(CartLoading());
     for (var course in _cartCourses) {
-      batch.set(cartCollection.doc(course.id), course.toJson());
+      batch.set(cartCollection.doc(course.id), (course as CourseModel).toJson());
     }
 
     await batch.commit();
   }
 
-  //Buying
   Future<void> fetchBoughtCourses() async {
     emit(CartLoading());
     try {
@@ -131,7 +125,7 @@ class CartCubit extends Cubit<CartState> {
           .get();
 
       _boughtCourses = boughtCoursesSnapshot.docs
-          .map((doc) => Course.fromJson({
+          .map((doc) => CourseModel.fromJson({
                 'id': doc.id,
                 ...doc.data(),
               }))
@@ -149,7 +143,6 @@ class CartCubit extends Cubit<CartState> {
     return (totalPriceInUSD * conversionRate);
   }
 
-  // Buy courses and clear the cart
   Future<void> buyCourses(BuildContext context) async {
     emit(CartLoading());
 
@@ -176,9 +169,9 @@ class CartCubit extends Cubit<CartState> {
 
         final batch = _fireStore.batch();
         for (var course in _cartCourses) {
-          course.hasBought = true;
-          batch.set(boughtCoursesRef.doc(course.id), course.toJson());
-          batch.delete(cartRef.doc(course.id));
+          final updatedCourse = course.copyWith(hasBought: true);
+          batch.set(boughtCoursesRef.doc(updatedCourse.id), (updatedCourse as CourseModel).toJson());
+          batch.delete(cartRef.doc(updatedCourse.id));
         }
 
         await batch.commit();
@@ -192,7 +185,7 @@ class CartCubit extends Cubit<CartState> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => const MyCoursesPage(),
+            builder: (context) => const MyCoursesScreen(),
           ),
         );
       } else {

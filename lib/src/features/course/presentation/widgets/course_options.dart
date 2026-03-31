@@ -1,9 +1,9 @@
+import 'package:edu_vista/src/features/course/domain/entities/course.dart';
 import 'package:edu_vista/src/features/course/presentation/pages/views/lectures_view.dart';
 import 'package:edu_vista/src/features/course/presentation/pages/views/more_view.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/utils/app_enums.dart';
-import '../../data/course_model.dart';
 import '../../helper/dialog_helper.dart';
 
 class CourseOptionsWidgets extends StatefulWidget {

@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:edu_vista/src/features/course/presentation/pages/my_courses.dart';
+import 'package:edu_vista/src/features/course/presentation/Screens/my_courses_screen.dart';
 import 'package:edu_vista/src/features/home/presentation/pages/home_page.dart';
 import 'package:edu_vista/src/features/search/search_page.dart';
 import 'package:edu_vista/src/shared/utils/image_utility.dart';
@@ -25,7 +25,7 @@ class _RootPageState extends State<RootPage> {
 
   static const List<Widget> pages = [
     HomePage(),
-    MyCoursesPage(),
+    MyCoursesScreen(),
     SearchPage(),
     ProfilePage(),
   ];

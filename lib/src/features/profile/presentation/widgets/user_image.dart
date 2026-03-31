@@ -29,7 +29,7 @@ class UserImage extends StatelessWidget {
           right: 1.w,
           child: IconButton(
             style: const ButtonStyle(
-              backgroundColor: MaterialStatePropertyAll(ColorUtility.blue),
+              backgroundColor: WidgetStatePropertyAll(ColorUtility.blue),
             ),
             icon: Icon(
               Icons.edit,

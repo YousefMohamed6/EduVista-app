@@ -1,22 +1,24 @@
-import 'package:edu_vista/src/shared/utils/color_utility.dart';
-import 'package:edu_vista/src/shared/utils/image_utility.dart';
+import 'package:edu_vista/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../shared/utils/text_utility.dart';
-import '../../../cart/logic/cart_cubit/cart_cubit.dart';
-import '../../../cart/presentation/widgets/shopping_cart_button.dart';
-import '../../data/course_model.dart';
-import '../widgets/course_tile.dart';
+import 'package:edu_vista/src/features/course/domain/entities/course.dart';
+import 'package:edu_vista/src/features/cart/logic/cart_cubit/cart_cubit.dart';
+import 'package:edu_vista/src/features/cart/presentation/widgets/shopping_cart_button.dart';
+import 'package:edu_vista/src/features/course/presentation/widgets/course_tile.dart';
+import 'package:edu_vista/src/shared/utils/color_utility.dart';
+import 'package:edu_vista/src/shared/utils/image_utility.dart';
+import 'package:edu_vista/src/shared/utils/text_utility.dart';
+import 'package:edu_vista/src/features/course/presentation/Screens/course_screen.dart';
 
-class MyCoursesPage extends StatefulWidget {
-  const MyCoursesPage({super.key});
+class MyCoursesScreen extends StatefulWidget {
+  const MyCoursesScreen({super.key});
 
   @override
-  State<MyCoursesPage> createState() => _MyCoursesPageState();
+  State<MyCoursesScreen> createState() => _MyCoursesScreenState();
 }
 
-class _MyCoursesPageState extends State<MyCoursesPage> {
+class _MyCoursesScreenState extends State<MyCoursesScreen> {
   @override
   void initState() {
     super.initState();
@@ -25,10 +27,11 @@ class _MyCoursesPageState extends State<MyCoursesPage> {
 
   @override
   Widget build(BuildContext context) {
+    final localization = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
           title: Text(
-            'My Courses',
+            localization.myCourses,
             style: TextUtility.titleText(),
           ),
           automaticallyImplyLeading: false,
@@ -51,7 +54,7 @@ class _MyCoursesPageState extends State<MyCoursesPage> {
           if (state is CartBoughtCourses) {
             if (state.boughtCourses.isEmpty) {
               return Center(
-                  child: Text('You haven\'t bought any courses yet',
+                  child: Text(localization.noCoursesBought,
                       style: TextUtility.fringeText(color: ColorUtility.grey)));
             }
 
@@ -73,19 +76,26 @@ class _MyCoursesPageState extends State<MyCoursesPage> {
         final course = boughtCourses[index];
         return CourseTile(
           title: course.title,
-          image: course.image!,
+          image: course.image,
           imagePlaceHolder: ImageUtility.courseImagePlaceholder,
-          width: 157,
-          height: 105,
+          width: 157.w,
+          height: 105.h,
           child: Row(
             children: [
               Icon(Icons.person, size: 20.sp),
+              SizedBox(width: 5.w),
               Text(
                 course.instructor?.name ?? '',
                 style: TextUtility.bodyText(),
               ),
             ],
           ),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => CourseScreen(course: course)));
+          },
         );
       },
     );
@@ -96,8 +106,9 @@ class _MyCoursesPageState extends State<MyCoursesPage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset(ImageUtility.notFound),
-          Text("No Courses Available at the moment")
+          Image.asset(ImageUtility.notFound, width: 200.w),
+          SizedBox(height: 20.h),
+          Text(AppLocalizations.of(context)!.noCoursesAvailable, style: TextUtility.bodyText())
         ],
       ),
     );

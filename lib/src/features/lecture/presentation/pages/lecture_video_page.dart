@@ -1,3 +1,4 @@
+import 'package:edu_vista/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:edu_vista/src/features/lecture/presentation/widgets/video_box.dart';
 import 'package:edu_vista/src/shared/utils/text_utility.dart';
@@ -27,7 +28,7 @@ class LectureVideoPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(lecture?.title ?? 'Lecture Video',
+        title: Text(lecture?.title ?? AppLocalizations.of(context)!.lectureVideo,
             style: TextUtility.titleText()),
         automaticallyImplyLeading: false,
         centerTitle: true,
@@ -47,7 +48,8 @@ class LectureVideoPage extends StatelessWidget {
           children: [
             lecture?.lecture_url == null || lecture!.lecture_url!.isEmpty
                 ? Center(
-                    child: Text('Invalid Url', style: TextUtility.titleText()),
+                    child: Text(AppLocalizations.of(context)!.invalidUrl,
+                        style: TextUtility.titleText()),
                   )
                 : YoutubeVideoPlayer(videoUrl: lecture!.lecture_url!),
             Padding(

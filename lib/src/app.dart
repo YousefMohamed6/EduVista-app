@@ -1,9 +1,11 @@
 import 'dart:ui';
 
 import 'package:device_preview/device_preview.dart';
+import 'package:edu_vista/l10n/app_localizations.dart';
 import 'package:edu_vista/src/features/splash/splash_page.dart';
 import 'package:edu_vista/src/shared/utils/color_utility.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MyApp extends StatelessWidget {
@@ -19,6 +21,16 @@ class MyApp extends StatelessWidget {
             title: 'Edu Vista',
             locale: DevicePreview.locale(context),
             builder: DevicePreview.appBuilder,
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: const [
+              Locale('en'),
+              Locale('ar'),
+            ],
             debugShowCheckedModeBanner: false,
             scrollBehavior: AppScrollBehaviour(),
             theme: ThemeData(

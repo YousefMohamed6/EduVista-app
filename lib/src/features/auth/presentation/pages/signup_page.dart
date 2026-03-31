@@ -1,3 +1,4 @@
+import 'package:edu_vista/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:edu_vista/src/features/auth/logic/auth_cubit/auth_cubit.dart';
@@ -43,10 +44,11 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
+    final localization = AppLocalizations.of(context)!;
     return BlocListener<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is SignupFailed) {
-          String message = _getErrorMessage(state.error);
+          String message = _getErrorMessage(state.error, localization);
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(message)),
           );
@@ -69,20 +71,20 @@ class _SignUpPageState extends State<SignUpPage> {
             MyTextField(
               controller: nameController,
               hint: 'Ahmed Ramy',
-              label: 'Full Name',
+              label: localization.fullName,
             ),
             SizedBox(height: 20.h),
             MyTextField(
               controller: emailController,
               hint: 'Ahmedramy52@gmail.com',
-              label: 'Email',
+              label: localization.email,
               keyboardType: TextInputType.emailAddress,
             ),
             SizedBox(height: 20.h),
             MyTextField(
               controller: passwordController,
               hint: '***********',
-              label: 'Password',
+              label: localization.password,
               obscureText: true,
               keyboardType: TextInputType.visiblePassword,
             ),
@@ -90,7 +92,7 @@ class _SignUpPageState extends State<SignUpPage> {
             MyTextField(
               controller: confirmPasswordController,
               hint: '***********',
-              label: 'Confirm Password',
+              label: localization.confirmPassword,
               obscureText: true,
               keyboardType: TextInputType.visiblePassword,
             ),
@@ -101,14 +103,14 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
-  String _getErrorMessage(String error) {
+  String _getErrorMessage(String error, AppLocalizations localization) {
     switch (error) {
       case 'email-already-in-use':
-        return 'Email is already in use.';
+        return localization.emailInUse;
       case 'weak-password':
-        return 'Password is too weak.';
+        return localization.weakPassword;
       default:
-        return 'Signup failed. Please try again.';
+        return localization.signupFailed;
     }
   }
 }

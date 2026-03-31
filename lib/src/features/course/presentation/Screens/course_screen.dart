@@ -1,26 +1,26 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:edu_vista/src/features/cart/presentation/widgets/add_to_cart_button.dart';
+import 'package:edu_vista/src/features/course/domain/entities/course.dart';
 import 'package:edu_vista/src/shared/utils/color_utility.dart';
 import 'package:edu_vista/src/shared/utils/image_utility.dart';
 import 'package:edu_vista/src/shared/utils/text_utility.dart';
 import 'package:edu_vista/src/shared/widgets/fetch_image_widget.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../data/course_model.dart';
+import '../manager/course_bloc.dart';
 import '../widgets/course_chips.dart';
-import '../../logic/bloc/course/course_bloc.dart';
 import '../widgets/course_options.dart';
 
-class CoursePage extends StatefulWidget {
+class CourseScreen extends StatefulWidget {
   final Course course;
-  const CoursePage({required this.course, super.key});
+  const CourseScreen({required this.course, super.key});
 
   @override
-  State<CoursePage> createState() => _CourseDetailsPageState();
+  State<CourseScreen> createState() => _CourseScreenState();
 }
 
-class _CourseDetailsPageState extends State<CoursePage> {
+class _CourseScreenState extends State<CourseScreen> {
   @override
   void initState() {
     context.read<CourseBloc>().add(CourseFetchEvent(widget.course));
@@ -77,8 +77,7 @@ class _CourseDetailsPageState extends State<CoursePage> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     const SizedBox(height: 30),
-                    Text(widget.course.title ?? '',
-                        style: TextUtility.titleText()),
+                    Text(widget.course.title, style: TextUtility.titleText()),
                     const SizedBox(height: 5),
                     Text(
                       widget.course.instructor?.name ?? '',

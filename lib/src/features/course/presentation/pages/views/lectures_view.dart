@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:edu_vista/src/features/course/domain/entities/course.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,7 +9,6 @@ import '../../../../lecture/data/lecture_model.dart';
 import '../../../../lecture/logic/lecture_bloc/lecture_bloc.dart';
 import '../../../../lecture/presentation/pages/lecture_video_page.dart';
 import '../../../../lecture/presentation/widgets/lecture_card.dart';
-import '../../../data/course_model.dart';
 
 class LecturesView extends StatefulWidget {
   final Course? course;
@@ -42,7 +42,7 @@ class _LecturesViewState extends State<LecturesView> {
     await Future.delayed(const Duration(milliseconds: 1200), () async {});
     if (!mounted) return;
     lectures =
-        await context.read<LectureBloc>().fetchLectures(widget.course!.id!);
+        await context.read<LectureBloc>().fetchLectures(widget.course!.id);
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       setState(() {
         isLoading = false;

@@ -1,4 +1,5 @@
 import 'package:meta/meta.dart';
+
 import '../../data/model/user_model.dart';
 
 @immutable

@@ -1,10 +1,10 @@
+import 'package:edu_vista/src/features/course/domain/entities/course.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../shared/utils/color_utility.dart';
 import '../../../cart/logic/cart_cubit/cart_cubit.dart';
-import '../../../course/data/course_model.dart';
 
 class AddToCartButton extends StatelessWidget {
   final Course course;

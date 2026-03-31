@@ -1,3 +1,4 @@
+import 'package:edu_vista/l10n/app_localizations.dart';
 import 'package:edu_vista/src/features/profile/presentation/pages/profie_page.dart';
 import 'package:edu_vista/src/shared/utils/text_utility.dart';
 import 'package:flutter/material.dart';
@@ -56,6 +57,7 @@ class _ProfileEditExpansionTileState extends State<ProfileEditExpansionTile> {
 
   @override
   Widget build(BuildContext context) {
+    final localization = AppLocalizations.of(context)!;
     return Form(
       key: formKey,
       child: Padding(
@@ -64,33 +66,33 @@ class _ProfileEditExpansionTileState extends State<ProfileEditExpansionTile> {
         child: Column(
           children: [
             ProfileListTile(
-              title: 'Name',
+              title: localization.fullName,
               subtitle: widget.user.name,
-              onPressed: () => _showNameDialog(context),
+              onPressed: () => _showNameDialog(context, localization),
             ),
             ProfileListTile(
-              title: 'Email',
+              title: localization.email,
               subtitle: widget.user.email,
-              onPressed: () => _showEmailDialog(context),
+              onPressed: () => _showEmailDialog(context, localization),
             ),
             ProfileListTile(
-              title: 'Password',
-              onPressed: () => _showPasswordChangeDialog(context),
+              title: localization.password,
+              onPressed: () => _showPasswordChangeDialog(context, localization),
             ),
             ProfileListTile(
-              title: 'Phone Number',
+              title: localization.phoneNumber,
               subtitle: widget.user.phoneNumber,
-              onPressed: () => _showPhoneNumberDialog(context),
+              onPressed: () => _showPhoneNumberDialog(context, localization),
             ),
             ProfileListTile(
-              title: 'Age',
+              title: localization.age,
               subtitle: widget.user.age,
-              onPressed: () => _showAgeDialog(context),
+              onPressed: () => _showAgeDialog(context, localization),
             ),
             ProfileListTile(
-              title: 'Gender',
+              title: localization.gender,
               subtitle: widget.user.gender,
-              onPressed: () => _showGenderSelectionDialog(context),
+              onPressed: () => _showGenderSelectionDialog(context, localization),
             ),
             SizedBox(height: 15.h),
             Row(children: [
@@ -103,18 +105,18 @@ class _ProfileEditExpansionTileState extends State<ProfileEditExpansionTile> {
                         MaterialPageRoute(
                             builder: (context) => const ProfilePage()));
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
+                      SnackBar(
                         backgroundColor: ColorUtility.main,
                         content: Text(
-                          'Changes have been saved!',
+                          localization.changesSaved,
                           textAlign: TextAlign.center,
-                          style: TextStyle(color: Colors.white),
+                          style: const TextStyle(color: Colors.white),
                         ),
                       ),
                     );
                   },
                   child: Text(
-                    "Save Changes",
+                    localization.saveChanges,
                     style: TextUtility.fringeText(color: Colors.white),
                   ),
                 ),
@@ -126,15 +128,15 @@ class _ProfileEditExpansionTileState extends State<ProfileEditExpansionTile> {
     );
   }
 
-  void _showEmailDialog(BuildContext context) {
+  void _showEmailDialog(BuildContext context, AppLocalizations localization) {
     showDialog(
       context: context,
       builder: (context) {
         return MyDialog(
-          title: 'Change Email',
+          title: localization.changeEmail,
           icon: Icons.email,
           child: MyTextField(
-            label: 'Email',
+            label: localization.email,
             hint: widget.user.email ?? '',
             controller: emailController,
           ),
@@ -148,15 +150,15 @@ class _ProfileEditExpansionTileState extends State<ProfileEditExpansionTile> {
     );
   }
 
-  void _showNameDialog(BuildContext context) {
+  void _showNameDialog(BuildContext context, AppLocalizations localization) {
     showDialog(
       context: context,
       builder: (context) {
         return MyDialog(
-          title: 'Change Name',
+          title: localization.changeName,
           icon: Icons.person,
           child: MyTextField(
-            label: 'Name',
+            label: localization.fullName,
             hint: widget.user.name ?? '',
             controller: nameController,
           ),
@@ -170,25 +172,25 @@ class _ProfileEditExpansionTileState extends State<ProfileEditExpansionTile> {
     );
   }
 
-  void _showPasswordChangeDialog(BuildContext context) {
+  void _showPasswordChangeDialog(BuildContext context, AppLocalizations localization) {
     showDialog(
       context: context,
       builder: (context) {
         return MyDialog(
-          title: 'Change Password',
+          title: localization.changePassword,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               MyTextField(
-                label: 'Current Password',
-                hint: 'Enter your current Password',
+                label: localization.currentPassword,
+                hint: localization.enterCurrentPassword,
                 controller: currentPasswordController,
                 obscureText: true,
               ),
               Align(
                 alignment: Alignment.centerRight,
                 child: MyTextButton(
-                  text: 'Forgot Your Password?',
+                  text: localization.forgotPassword,
                   textStyle:
                       TextUtility.fringeText(color: ColorUtility.secondary),
                   onPressed: () {
@@ -202,15 +204,15 @@ class _ProfileEditExpansionTileState extends State<ProfileEditExpansionTile> {
               SizedBox(height: 10.h),
               Divider(color: ColorUtility.softGrey),
               MyTextField(
-                label: 'New Password',
-                hint: 'Enter your New Password',
+                label: localization.newPassword,
+                hint: localization.enterNewPassword,
                 controller: newPasswordController,
                 obscureText: true,
               ),
               SizedBox(height: 5.h),
               MyTextField(
-                label: 'Confirm New Password',
-                hint: 'Confirm your New Password',
+                label: localization.confirmNewPassword,
+                hint: localization.confirmYourNewPassword,
                 controller: confirmNewPasswordController,
                 obscureText: true,
               ),
@@ -232,16 +234,16 @@ class _ProfileEditExpansionTileState extends State<ProfileEditExpansionTile> {
     );
   }
 
-  void _showPhoneNumberDialog(BuildContext context) {
+  void _showPhoneNumberDialog(BuildContext context, AppLocalizations localization) {
     showDialog(
       context: context,
       builder: (context) {
         return MyDialog(
-            title: 'Add Phone Number',
+            title: localization.addPhoneNumber,
             icon: Icons.phone,
             child: MyTextField(
               controller: phoneController,
-              label: 'Phone Number',
+              label: localization.phoneNumber,
               hint: widget.user.phoneNumber!,
             ),
             onConfirm: () {
@@ -253,15 +255,15 @@ class _ProfileEditExpansionTileState extends State<ProfileEditExpansionTile> {
     );
   }
 
-  void _showAgeDialog(BuildContext context) {
+  void _showAgeDialog(BuildContext context, AppLocalizations localization) {
     showDialog(
       context: context,
       builder: (context) {
         return MyDialog(
-            title: 'Add Age',
+            title: localization.addAge,
             child: MyTextField(
               controller: ageController,
-              label: 'Age',
+              label: localization.age,
               hint: widget.user.age!,
             ),
             onConfirm: () {
@@ -273,12 +275,12 @@ class _ProfileEditExpansionTileState extends State<ProfileEditExpansionTile> {
     );
   }
 
-  void _showGenderSelectionDialog(BuildContext context) {
+  void _showGenderSelectionDialog(BuildContext context, AppLocalizations localization) {
     showDialog(
       context: context,
       builder: (context) {
         return MyDialog(
-            title: 'Select Gender',
+            title: localization.selectGender,
             icon: Icons.wc,
             child: DropdownButtonFormField<String>(
               borderRadius: BorderRadius.circular(15.r),

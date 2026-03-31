@@ -1,3 +1,4 @@
+import 'package:edu_vista/src/features/course/domain/entities/course.dart';
 import 'package:edu_vista/src/shared/widgets/buttons/my_text_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,7 +7,6 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../../../shared/utils/color_utility.dart';
 import '../../../../../shared/widgets/tiles/my_expansion_tile.dart';
 import '../../../../instructor/presentation/instructor_tile.dart';
-import '../../../data/course_model.dart';
 
 class MoreView extends StatelessWidget {
   final Course? course;
@@ -28,6 +28,8 @@ class MoreView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (course == null) return const SizedBox.shrink();
+
     return ListView.separated(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
@@ -38,7 +40,7 @@ class MoreView extends StatelessWidget {
         child: index == 0
             ? _buildAboutInstructor()
             : index == 1
-                ? _buildRescourses()
+                ? _buildResources()
                 : const SizedBox(),
       ),
     );
@@ -56,7 +58,13 @@ class MoreView extends StatelessWidget {
     );
   }
 
-  Widget _buildRescourses() {
+  Widget _buildResources() {
+    if (course!.resource == null || course!.resource!.isEmpty) {
+      return Padding(
+        padding: EdgeInsets.all(10.h),
+        child: const Text('No resources available for this course'),
+      );
+    }
     return Padding(
         padding: EdgeInsets.all(10.h),
         child: Row(
@@ -66,11 +74,13 @@ class MoreView extends StatelessWidget {
               color: ColorUtility.secondary,
             ),
             SizedBox(width: 10.w),
-            MyTextButton(
-                text: course!.title!,
-                onPressed: () {
-                  launchURL(course!.resource!);
-                })
+            Flexible(
+              child: MyTextButton(
+                  text: course!.title,
+                  onPressed: () {
+                    launchURL(course!.resource!);
+                  }),
+            )
           ],
         ));
   }
